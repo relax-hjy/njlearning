@@ -426,7 +426,52 @@ type Record<K extends string, T> = { [P in K]: T };
 
 ## Git
 
-### 常用工作流
+### 从零初始化项目
+
+```bash
+# 第一步：配身份（全局一次）
+git config --global user.name "你的名字"
+git config --global user.email "你的邮箱"
+
+# 第二步：创建 .gitignore，忽略可自动生成的文件
+echo "node_modules/" > .gitignore
+echo "dist/" >> .gitignore
+
+# 第三步：初始化仓库并首次提交
+git init
+git add .
+git commit -m "初始化项目"
+```
+
+**什么该传，什么不传：**
+
+| 传（源码） | 不传（可生成） |
+|------------|----------------|
+| `index.html`、`main.js`、`server.js` 等 | `node_modules/` |
+| `package.json`、`package-lock.json` | `dist/` |
+| 配置文件、`.gitignore` | `.env`（含密钥的文件） |
+
+### 推送到 GitHub
+
+```bash
+# 1. 在 GitHub 创建空仓库（不要勾选 README）
+# 2. 关联远程地址
+git remote add origin https://github.com/用户名/仓库名.git
+
+# 3. 首次推送
+git push -u origin master
+```
+
+### 日常开发流程
+
+```bash
+git status                              # 看看改了哪些文件
+git add .                               # 暂存所有修改
+git commit -m "描述做了什么改动"          # 本地提交
+git push                                # 推到 GitHub
+```
+
+### 常用命令速查
 ```bash
 git status                    # 查看状态
 git add <file>                # 暂存文件
